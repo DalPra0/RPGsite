@@ -4,173 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows XP Simulator</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: url('./imagens/wallpaper.jpeg') no-repeat center center fixed;
-            background-size: cover;
-            overflow: hidden;
-        }
-
-        /* Barra de Tarefas */
-        #taskbar {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 40px;
-            background: #c3c7cb;
-            border-top: 2px solid #fff;
-            display: flex;
-            align-items: center;
-        }
-
-        #start-button {
-            background: linear-gradient(to bottom, #e4e4e4, #c0c0c0);
-            border: 1px solid #7f7f7f;
-            height: 30px;
-            width: 60px;
-            margin-left: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        #start-button:hover {
-            background: linear-gradient(to bottom, #d0d0d0, #a8a8a8);
-        }
-
-        #start-menu {
-            position: absolute;
-            bottom: 40px;
-            left: 5px;
-            width: 200px;
-            background: #e4e4e4;
-            border: 1px solid #7f7f7f;
-            display: none;
-            z-index: 1000;
-        }
-
-        #start-menu ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        #start-menu ul li {
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        #start-menu ul li:hover {
-            background: #d0d0d0;
-        }
-
-        /* Ícones */
-        .desktop-icon {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .desktop-icon img {
-            width: 64px;
-            height: 64px;
-        }
-
-        /* Janelas */
-        .window {
-            position: absolute;
-            width: 500px;
-            height: 400px;
-            background: #fff;
-            border: 2px solid #7f7f7f;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
-            z-index: 10;
-            display: none;
-            resize: both;
-            overflow: hidden;
-        }
-
-        .window-header {
-            background: #0078d4;
-            color: #fff;
-            padding: 5px;
-            cursor: move;
-        }
-
-        .window-body {
-            padding: 10px;
-            height: calc(100% - 40px);
-            overflow: auto;
-        }
-
-        .close-button {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            width: 20px;
-            height: 20px;
-            background: red;
-            color: white;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        /* Botões na Barra de Tarefas */
-        .taskbar-button {
-            background: #e4e4e4;
-            border: 1px solid #7f7f7f;
-            height: 30px;
-            margin-left: 5px;
-            padding: 0 10px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .taskbar-button:hover {
-            background: #d0d0d0;
-        }
-
-        /* Abas de Email */
-        .email-tabs {
-            display: flex;
-            border-bottom: 1px solid #7f7f7f;
-            padding-bottom: 5px;
-        }
-
-        .email-tab {
-            padding: 5px 10px;
-            background: #e4e4e4;
-            border: 1px solid #7f7f7f;
-            cursor: pointer;
-            margin-right: 5px;
-        }
-
-        .email-tab.active {
-            background: #fff;
-            border-bottom: none;
-        }
-
-        .email-content {
-            display: none;
-        }
-
-        .email-content.active {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="taskbar">
         <div id="start-button">Start</div>
         <div id="taskbar-buttons"></div>
-        <div id="datetime"></div>
+        <div id="datetime">
+            <div id="date">21/04/1997</div>
+            <div id="time"></div>
+        </div>
     </div>
 
     <div id="start-menu">
@@ -188,137 +31,70 @@
         <div class="window-header">Email Application</div>
         <div class="close-button">X</div>
         <div class="window-body">
-            <div class="email-tabs">
-                <div class="email-tab active" data-email="1">Email 1</div>
-                <div class="email-tab" data-email="2">Email 2</div>
-                <div class="email-tab" data-email="3">Email 3</div>
+            <!-- Abas principais -->
+            <div class="main-tabs">
+                <div class="main-tab active" data-tab="received">Recebido</div>
+                <div class="main-tab" data-tab="sent">Enviado</div>
             </div>
-            <div id="email-1" class="email-content active">
-                <h3>Assunto: Bem-vindo!</h3>
-                <p>Olá! Este é o seu primeiro email.</p>
+
+            <!-- Conteúdo de "Recebido" -->
+            <div id="received" class="tab-content active">
+                <div class="sub-tabs">
+                    <div class="sub-tab active" data-sub-tab="1">Recebido 1</div>
+                    <div class="sub-tab" data-sub-tab="2">Recebido 2</div>
+                    <div class="sub-tab" data-sub-tab="3">Recebido 3</div>
+                    <div class="sub-tab" data-sub-tab="4">Recebido com áudio</div>
+                </div>
+                <div id="received-1" class="tab-content active">
+                    <h3>Email Recebido 1</h3>
+                    <p>Conteúdo do email recebido 1.</p>
+                </div>
+                <div id="received-2" class="tab-content">
+                    <h3>Email Recebido 2</h3>
+                    <p>Conteúdo do email recebido 2.</p>
+                </div>
+                <div id="received-3" class="tab-content">
+                    <h3>Email Recebido 3</h3>
+                    <p>Conteúdo do email recebido 3.</p>
+                </div>
+                <div id="received-4" class="tab-content">
+                    <h3>Email com Áudio</h3>
+                    <audio controls id="audio-player">
+                        <source src="audio.mp3" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
             </div>
-            <div id="email-2" class="email-content">
-                <h3>Assunto: Atualização do Sistema</h3>
-                <p>Não esqueça de atualizar o sistema para a versão mais recente.</p>
-            </div>
-            <div id="email-3" class="email-content">
-                <h3>Assunto: Reunião</h3>
-                <p>A reunião será realizada amanhã às 14h.</p>
+
+            <!-- Conteúdo de "Enviado" -->
+            <div id="sent" class="tab-content">
+                <div class="sub-tabs">
+                    <div class="sub-tab active" data-sub-tab="1">Enviado 1</div>
+                    <div class="sub-tab" data-sub-tab="2">Enviado 2</div>
+                    <div class="sub-tab" data-sub-tab="3">Enviado 3</div>
+                    <div class="sub-tab" data-sub-tab="4">Enviado 4</div>
+                </div>
+                <div id="sent-1" class="tab-content active">
+                    <h3>Email Enviado 1</h3>
+                    <p>Conteúdo do email enviado 1.</p>
+                </div>
+                <div id="sent-2" class="tab-content">
+                    <h3>Email Enviado 2</h3>
+                    <p>Conteúdo do email enviado 2.</p>
+                </div>
+                <div id="sent-3" class="tab-content">
+                    <h3>Email Enviado 3</h3>
+                    <p>Conteúdo do email enviado 3.</p>
+                </div>
+                <div id="sent-4" class="tab-content">
+                    <h3>Email Enviado 4</h3>
+                    <p>Senha para &cOsB**: 49183</p><br>
+                    <p>Senha para +e4#Zn: 06934</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        const startButton = document.getElementById('start-button');
-        const startMenu = document.getElementById('start-menu');
-        const emailIcon = document.querySelector('.desktop-icon');
-        const emailWindow = document.getElementById('email-window');
-        const closeButton = emailWindow.querySelector('.close-button');
-        const taskbarButtons = document.getElementById('taskbar-buttons');
-        const datetimeDisplay = document.getElementById('datetime');
-    
-        // Estilo para data e hora na barra de tarefas
-        datetimeDisplay.style.marginLeft = 'auto';
-        datetimeDisplay.style.marginRight = '10px';
-        datetimeDisplay.style.fontSize = '14px';
-        datetimeDisplay.style.color = '#000';
-    
-        // Atualizar data e hora
-        function updateDatetime() {
-            const now = new Date();
-            const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            const fixedDate = "21/04/1997";
-            datetimeDisplay.textContent = `${fixedDate} ${time}`;
-        }
-    
-        setInterval(updateDatetime, 1000); // Atualiza a cada segundo
-        updateDatetime(); // Atualiza imediatamente ao carregar
-    
-        // Menu Iniciar
-        startButton.addEventListener('click', () => {
-            startMenu.style.display = startMenu.style.display === 'block' ? 'none' : 'block';
-        });
-    
-        // Abrir janela de email pelo menu iniciar
-        document.getElementById('open-email').addEventListener('click', () => {
-            openWindow(emailWindow, 'Email');
-        });
-    
-        // Abrir janela de email pelo ícone na área de trabalho
-        emailIcon.addEventListener('click', () => {
-            openWindow(emailWindow, 'Email');
-        });
-    
-        // Fechar janela de email
-        closeButton.addEventListener('click', () => {
-            closeWindow(emailWindow);
-        });
-    
-        // Abrir uma janela e criar botão na barra de tarefas
-        function openWindow(windowElement, title) {
-            windowElement.style.display = 'block';
-    
-            // Verificar se o botão na barra de tarefas já existe
-            let existingButton = document.querySelector(`.taskbar-button[data-window="${windowElement.id}"]`);
-            if (!existingButton) {
-                const button = document.createElement('div');
-                button.classList.add('taskbar-button');
-                button.dataset.window = windowElement.id;
-                button.textContent = title;
-                button.addEventListener('click', () => {
-                    if (windowElement.style.display === 'block') {
-                        windowElement.style.display = 'none';
-                    } else {
-                        windowElement.style.display = 'block';
-                    }
-                });
-                taskbarButtons.appendChild(button);
-            }
-        }
-    
-        // Fechar janela e remover botão da barra de tarefas
-        function closeWindow(windowElement) {
-            windowElement.style.display = 'none';
-            const taskbarButton = document.querySelector(`.taskbar-button[data-window="${windowElement.id}"]`);
-            if (taskbarButton) {
-                taskbarButtons.removeChild(taskbarButton);
-            }
-        }
-    
-        // Arrastar janelas
-        let isDragging = false;
-        let offsetX, offsetY;
-    
-        emailWindow.querySelector('.window-header').addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - emailWindow.offsetLeft;
-            offsetY = e.clientY - emailWindow.offsetTop;
-        });
-    
-        document.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                emailWindow.style.left = `${e.clientX - offsetX}px`;
-                emailWindow.style.top = `${e.clientY - offsetY}px`;
-            }
-        });
-    
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-    
-        // Abas de email
-        const tabs = document.querySelectorAll('.email-tab');
-        const contents = document.querySelectorAll('.email-content');
-    
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
-    
-                tab.classList.add('active');
-                document.getElementById(`email-${tab.dataset.email}`).classList.add('active');
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
