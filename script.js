@@ -58,7 +58,7 @@ receivedAudioTab.addEventListener('click', () => {
     
     if (password === "06934") {
         receivedAudioContent.style.display = 'block';
-    } else {
+    } else if (password === null) {
         alert("Senha incorreta ou cancelada! Fechando a página.");
         // Fecha a janela (funciona apenas se for aberta via script)
         window.open('', '_self'); // Necessário para navegadores modernos
