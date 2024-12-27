@@ -56,7 +56,7 @@ subTabs.forEach(tab => {
 receivedAudioTab.addEventListener('click', () => {
     const password = prompt("Digite a senha para acessar este email:");
     
-    if (password === "06934") {
+    if (password === "Carmim") {
         receivedAudioContent.style.display = 'block';
     } else if (password === null) {
         alert("Senha incorreta ou cancelada! Fechando a página.");
